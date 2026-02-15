@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { forkJoin } from 'rxjs';
-import { Content, ContentCategory } from './models/content.interface';
+import { Content } from './models/content.interface';
 import { ModalService } from './services/modal.service';
-import { ContentService } from './services/content.service'; // Adjust the path as needed
+import { ContentService } from './services/content.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',

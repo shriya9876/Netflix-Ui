@@ -1,28 +1,37 @@
 import { Component, HostListener } from '@angular/core';
 
+/**
+ * Top navigation header with Netflix-style scroll behavior.
+ *
+ * The header starts transparent and becomes opaque once the user
+ * scrolls past a threshold, mimicking Netflix's sticky nav effect.
+ */
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent {
-  isSearchVisible = false; // Controls search visibility
-  isMobileNavVisible = false; // Controls mobile navigation visibility
-  isScrolled = false; // Tracks scroll state for sticky behavior
+  isSearchVisible = false;
+  isMobileNavVisible = false;
+  isScrolled = false;
 
-  // Toggles the search bar visibility
+  /**
+   * Pixel threshold before the header switches to its opaque "scrolled" style.
+   * 50 px keeps the header transparent while the hero banner is fully visible.
+   */
+  private static readonly SCROLL_THRESHOLD = 50;
+
   toggleSearch() {
     this.isSearchVisible = !this.isSearchVisible;
   }
 
-  // Toggles the mobile navigation visibility
   toggleMobileNav() {
     this.isMobileNavVisible = !this.isMobileNavVisible;
   }
 
-  // Detects scroll position to apply sticky behavior
   @HostListener('window:scroll', [])
   onScroll() {
-    this.isScrolled = window.scrollY > 50; // Add scrolled class if scroll position > 50px
+    this.isScrolled = window.scrollY > HeaderComponent.SCROLL_THRESHOLD;
   }
 }

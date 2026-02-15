@@ -1,20 +1,23 @@
 import { Component, Input } from '@angular/core';
-import { Content } from '../../models/content.interface'; // Adjust the path as needed
+import { Content } from '../../models/content.interface';
 import { ModalService } from 'src/app/services/modal.service';
-import { ContentService } from 'src/app/services/content.service'; // Adjust the path as needed
 
+/**
+ * Modal dialog that shows full details for a selected content item
+ * including backdrop image, description, rating, and similar titles.
+ */
 @Component({
   selector: 'app-movie-detail',
   templateUrl: './movie-detail.component.html',
   styleUrls: ['./movie-detail.component.scss']
 })
 export class MovieDetailComponent {
+  /** The content item whose details are displayed in the modal. */
   @Input() content!: Content;
-  similarMovies: Content[] = []; // This should be populated with similar movies data
 
-  constructor(private modalService: ModalService,
-    private contentService: ContentService
-  ) { }
+  similarMovies: Content[] = [];
+
+  constructor(private modalService: ModalService) {}
 
   closeModal() {
     this.modalService.closeModal();
@@ -28,8 +31,7 @@ export class MovieDetailComponent {
     console.log('Added to list:', this.content.title);
   }
 
-onCardClick(movie: Content) {
+  onCardClick(movie: Content) {
     this.modalService.openModal(movie);
   }
-
 }
